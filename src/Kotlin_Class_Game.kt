@@ -1,3 +1,4 @@
+import sun.font.TrueTypeFont
 import java.util.*
 
 open class Object() {
@@ -8,11 +9,6 @@ class char : Object(){
         var atk = 0.0
         var exp = 0.0
 }
-
-
-
-
-
 
 fun main(){
     var player = char()
@@ -38,7 +34,16 @@ fun inputdata(name: char, index: String){
     println("")
 }
 
-fun combat(player: char, index1: String, monster: char, index2: String){
+fun combat(char1: char, index1: String, char2: char, index2: String){
     println("${index1}가 ${index2}를 공격했다!")
-    player
+    char2.hp = char2.hp - char1.atk
+    if(char1.hp <= 0 || char2.hp <= 0)
+        println("전투 종료! \n${index1} 의 체력 : ${char1}, ${index2} 의 체력 : ${char2}")
+    else
+        println("${index2}의 체력 : ${char2.hp}")
+
+}
+
+fun reward(){
+
 }
