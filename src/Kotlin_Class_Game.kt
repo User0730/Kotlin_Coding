@@ -1,5 +1,3 @@
-import sun.audio.AudioPlayer.player
-import sun.font.TrueTypeFont
 import java.util.*
 
 open class Object() {
@@ -37,7 +35,7 @@ fun inputdata(name: char, index: String){
     println("")
 }
 
-fun combat(char1: char, index1: String, char2: char, index2: String){
+fun combat(char1: char, index1: String, char2: char, index2: String) : Boolean{
     println("${index1}가 ${index2}를 공격했다!")
     var rnds = (0..4).random()
     if(rnds == 1) {
@@ -46,12 +44,15 @@ fun combat(char1: char, index1: String, char2: char, index2: String){
     }
     else
         char2.hp = char2.hp - char1.atk
-    if (char1.hp <= 0.0 || char2.hp <= 0.0)
+
+    if (char1.hp <= 0.0 || char2.hp <= 0.0){
         result1 = true
-    else
+        return true}
+    else {
         println("${index2}의 체력 : ${char2.hp}")
         combat(char2, index2, char1, index1)
-
+        return false
+    }
 }
 
 fun reward(result1: Boolean, char1: char, index1: String, char2: char, index2: String){
@@ -61,13 +62,13 @@ fun reward(result1: Boolean, char1: char, index1: String, char2: char, index2: S
                char2.gold = char2.gold + char1.gold
                char1.gold = 0.0
                char1.exp = 0.0
-               println("${index2}의 경험치 : ${char2.exp}\n${index2}의 잔고 : ${char2.gold}")}
+               println("${index1} 가 쓰러졌다!\n${index2}의 경험치 : ${char2.exp}\n${index2}의 잔고 : ${char2.gold}")}
         else -> {
-             char1.exp = char2.exp + char1.exp
-             char2.gold = char2.gold + char1.gold
+             char1.exp = char1.exp + char2.exp
+             char1.gold = char1.gold + char2.gold
              char2.gold = 0.0
              char2.exp = 0.0
-             println("${index1}의 경험치 : ${char1.exp}\n${index1}의 잔고 : ${char1.gold}")
+             println("${index2} 가 쓰러졌다!\n${index1}의 경험치 : ${char1.exp}\n${index1}의 잔고 : ${char1.gold}")
          }
          }
 }
