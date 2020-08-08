@@ -57,8 +57,8 @@ fun combat(char1: char, index1: String, char2: char, index2: String) : Boolean{
 
 fun reward(result1: Boolean, char1: char, index1: String, char2: char, index2: String){
     if(result1 == true)
-        when(char1.hp) {
-        0.0 -> {char2.exp = char2.exp + char1.exp
+        when(char1.hp <= 0) {
+        true -> {char2.exp = char2.exp + char1.exp
                char2.gold = char2.gold + char1.gold
                char1.gold = 0.0
                char1.exp = 0.0
